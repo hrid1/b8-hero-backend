@@ -44,7 +44,7 @@ const CoffeeCard = ({ coffee }) => {
   };
 
   return (
-    <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden w-96 flex items-center mx-auto p-2 text-left">
+    <div className="bg-gray-800 shadow-lg rounded-lg overflow-hidden w-full flex items-center mx-auto p-2 text-left">
       <img
         src={photo}
         alt="Coffee Cup"
