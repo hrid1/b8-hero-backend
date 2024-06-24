@@ -13,12 +13,27 @@ const SignIn = () => {
         const password = form.password.value;
         // console.log(email, password);
         signInUser(email, password)
-        .then(user => {
-          console.log(user)
+       .then(result => {
+        console.log(result.user);
+        const user = {
+          email,
+          lastLoggedAt: result.user?.metadata?.lastSignInTime,
+        }
+        // update last logged at in the db
+        fetch('http://localhost:5001/user', {
+          method: 'PATCH',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(user)
         })
-        .catch(error => {
-          console.log(error.message)
-        })
+        .then(res => res.json())
+        .then(data => console.log(data)) 
+
+       })
+       .catch(err => {
+        console.error(err)
+       })
         
     }
 
