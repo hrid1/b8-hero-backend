@@ -1,9 +1,9 @@
-import React from "react";
+
 import { FaArrowRight } from "react-icons/fa";
 
 const ServiceCard = ({ service }) => {
   const { img, title, price } = service;
-  console.log(service);
+  // console.log(service);
   return (
     <div className="card card-compact bg-base-100 w-96 shadow-xl">
       <figure>

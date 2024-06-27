@@ -1,15 +1,26 @@
-import React from "react";
+import  { useContext } from "react";
 import signup from "../../../src/assets/images/login/login.svg";
-
-const handleSignup = (event) => {
-  event.preventDefault();
-  const form = event.target;
-  const email = form.email.value;
-  const password = form.password.value;
-  console.log(email, password);
-};
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
 
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
+  const handleSignup = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .then((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div className="flex flex-col md:flex-row items-center  p-6">
       {/* img */}
@@ -19,11 +30,16 @@ const SignUp = () => {
 
       {/* signup */}
 
-      <div className="w-full mr-10 max-w-md p-8 space-y-8 bg-white shadow rounded-lg">
+      <div className="w-full mr-10 max-w-md p-8 space-y-8 bg-white shadow-md rounded-lg">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Sign Up
         </h2>
-        <form onSubmit={handleSignup} className="mt-8 space-y-6" action="#" method="POST">
+        <form
+          onSubmit={handleSignup}
+          className="mt-8 space-y-6"
+          action="#"
+          method="POST"
+        >
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
@@ -81,9 +97,12 @@ const SignUp = () => {
         <div className="flex items-center justify-center">
           <p className="text-sm">
             Have an account?{" "}
-            <a href="#" className="font-medium text-red-600 hover:text-red-500">
+            <Link
+              to="/login"
+              className="font-medium text-red-600 hover:text-red-500"
+            >
               Sign In
-            </a>
+            </Link>
           </p>
         </div>
       </div>
